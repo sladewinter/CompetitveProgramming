@@ -1,5 +1,7 @@
 //  Articulation Point and Bridges using Tarjan algorithm
 //  Note: Only works for Undirected Graph
+// For detailed explanation please visit the follow link
+//https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/
 
 /*  Use the following input - Adjacency list representation
   6                             //No of nodes = 6
