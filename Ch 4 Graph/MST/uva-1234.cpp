@@ -26,8 +26,8 @@ public:
   {
     parent.assign( n, 0 );               //Set representative
     for( int i{0}; i < n; ++i )
-      parent[i] = i;
-
+      parent[ i ] = i;
+    
     rank.assign( n, 0 );                 //For Union by Rank
   }
 
