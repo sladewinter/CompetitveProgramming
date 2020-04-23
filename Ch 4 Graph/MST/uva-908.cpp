@@ -100,6 +100,7 @@ int main()
       if( noEdges == N - 1 )
         break;
     }
+
     printf( "%d\n%d\n", init, final );
   }
   return 0;
