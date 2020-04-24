@@ -44,7 +44,7 @@ int main()
 			q.pop();
 
 			if( x < 0 || x >= R || y < 0 || y >=C || grid[x][y] != 0 
-												  || grid[x][y] == -1 )
+			 				      || grid[x][y] == -1 )
 				continue;
 
 			grid[x][y] = color;
