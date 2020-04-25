@@ -30,19 +30,19 @@ int main()
 				{
 					scanf( "%c", &grid[i][j][k] );
 					if( grid[i][j][k] == 'S' )
-                    {
+                    			{
 						st_x = i;
-                        st_y = j;
-                        st_z = k;
-                    }
+			                        st_y = j;
+                        			st_z = k;
+                    			}
 					if( grid[i][j][k] == 'E' )
-                    {
+                    			{
 						end_x = i;
-                        end_y = j;
-                        end_z = k;
-                    }
+			                        end_y = j;
+                        			end_z = k;
+		                        }
 				}
-                scanf( "\r\n" );
+                	scanf( "\r\n" );
 			}
 		while( !q.empty() )
 			q.pop();
@@ -57,7 +57,8 @@ int main()
 			if( x < 0 || x >= L || y <  0 || y >= R
 		              || z <  0 || z >= C
 		              || c_grid[x][y][z]  != -1
-				      ||   grid[x][y][z]  == '#' )
+			      ||   grid[x][y][z]  == '#' )
+					
 				continue;
 
 			c_grid[x][y][z] = color;
