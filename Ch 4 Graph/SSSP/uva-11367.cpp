@@ -47,53 +47,53 @@ int main()
 	int n, m;
 	scanf( "%d %d", &n, &m );               //Cities, Edges
 
-    int price;                         
+        int price;                         
 	for( int i{0}; i < n; ++i )
-    {
-        scanf( "%d", &price );    //Price per unit at city i
+    	{
+        	scanf( "%d", &price );    //Price per unit at city i
 
-        for( int j{0}; j < 100; ++j )
-            AdjList[i][j].emplace_back( price, i, j + 1 );
-            //Stay in same city, but 1 unit fuel cost added
-    }
+	        for( int j{0}; j < 100; ++j )
+        	    AdjList[i][j].emplace_back( price, i, j + 1 );
+       		    //Stay in same city, but 1 unit fuel cost added
+    	}
 
 	int u, v, d;
 	for( int i{0}; i < m; ++i )
 	{
 		scanf( "%d %d %d", &u, &v, &d );     //u - v distance
 		for( int j{0}; j <= 100; ++j)
-            if( j >= d)                      //Enough fuel to reach v
-            {
-                //Note: Edges are cost of buying new fuel only
-                AdjList[u][j].emplace_back( 0, v, j-d );
-                AdjList[v][j].emplace_back( 0, u, j-d );
-            }
+            	if( j >= d)                      //Enough fuel to reach v
+            	{
+                	//Note: Edges are cost of buying new fuel only
+                	AdjList[u][j].emplace_back( 0, v, j-d );
+                	AdjList[v][j].emplace_back( 0, u, j-d );
+            	}
 	}
 
 	int q;                                  //Queries
 	scanf( "%d", &q ); 
 
 	int s, e, c;                            //Start, end, car capacity
-    int result;
+    	int result;
 	while( q-- )
 	{
 		scanf( "%d %d %d", &c, &s, &e );
-        for( int i{0}; i < n; ++i )
-            for( int j{0}; j <= c; ++j )
-                dist[i][j] = 9999;         //Reset distance matrix
+        	for( int i{0}; i < n; ++i )
+            		for( int j{0}; j <= c; ++j )
+                		dist[i][j] = 9999;         //Reset distance matrix
 
-        dist[s][0] = 0;                    //Source distance = 0
-        while( !pq.empty() )               //Remove previous entries
-            pq.pop();
-        pq.push( { 0, s, 0 } );            //Distance 0, state( s, 0 )
-        DjikstraSSTF( c );                 //capacity is parameter
+	        dist[s][0] = 0;                    //Source distance = 0
+        	while( !pq.empty() )               //Remove previous entries
+            		pq.pop();
 
-        //Least cost is reaching end with fuel 0
-        ( dist[e][0] == 9999 ) ? printf( "impossible\n" )
-                               : printf( "%d\n", dist[e][0] );
+        	pq.push( { 0, s, 0 } );            //Distance 0, state( s, 0 )
+        	DjikstraSSTF( c );                 //capacity is parameter
 
+	        //Least cost is reaching end with fuel 0
+        	( dist[e][0] == 9999 ) ? printf( "impossible\n" )
+                	               : printf( "%d\n", dist[e][0] );
 	}
-    return 0;
+    	return 0;
 }
 
 
