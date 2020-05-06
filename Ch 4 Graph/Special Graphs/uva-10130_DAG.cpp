@@ -66,7 +66,12 @@ int main()
                 if( w - W[i] >= 0 )
                   AdjList[i][w].push_back({ i + 1, w - W[i], P[i] });
             }
-            
+
+        //This is very important step as AdjList[N] remains filled
+        //for one larger value of G and for next smaller value of G, 
+        //it gives error as TopoSort unintentionally continues execution
+        for( int w{ 30 }; w >= 0; --w )
+            AdjList[N][w].clear();
 
         scanf( "%d", &G );
 
@@ -75,18 +80,22 @@ int main()
         {
             scanf( "%d", &MW );
 
-            //Topologically sort our DAG
+            //Topologically sort our DAG in O( V ) as E = O( 2V ) here
             topologic.clear();
-            visited.assign( N + 1, vb( 30 + 1, false ) );
+            visited.assign( N + 1, vb( MW + 1, false ) );
             toposort( 0, MW );
             reverse( topologic.begin(), topologic.end() );
 
+            //Longest Path on DAG
+            //This step takes O( V ) as AdjList[u] contains 2 edges 
             int x, y, val;
             dist.assign( N + 1, vi( MW + 1, 0 ) );
             for( auto &u : topologic )
                 for( auto &v : AdjList[u.first][u.second] )
                 {
                     tie( x, y, val ) = v;
+
+                    //Take the longer path, longest path first
                     dist[x][y] = max( dist[x][y], 
                         dist[u.first][u.second] + val );
                 }
