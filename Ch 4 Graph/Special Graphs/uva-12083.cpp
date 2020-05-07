@@ -22,24 +22,26 @@ struct student
 
 vvi AdjList;
 vi match;                      //Assigning a boy as match to a girl
-vb visited;                   //To prevent revisiting vertices
-bool Augment( int u )
+vb visited;                   //Prevent revisiting vertices while matching
+
+bool Augment( int u ) 
 {
     if( visited[u] )        //No augmenting path found, return 0
         return 0;
 
-    visited[u] = true;  
+    visited[u] = true;      //u is now visited in this iteration
 
-    //For all possible matches v of u
+    //For all possible matches u - v 
     for( auto &v : AdjList[u] )
 
-        //If v not matched already, or augmenting path found from v
+        //If v not matched already, match u - v
+        //Else try to find a separate match for match[v]( augmenting path )
         if( match[v] == -1 || Augment( match[v] ) )
         {
             match[v] = u;                            //Match v to u
-            return 1;                               //Return 1
+            return 1;                               //1 more match
         } 
-    return 0;           //No augmenting path found for u, return 0    
+    return 0;           //No matches found for u, returning 0    
 }
 
 int main()
@@ -84,12 +86,13 @@ int main()
         int MCBM = 0;
         match.assign( N, -1 );
 
-        //Start with a new left vertex( boy ) in each iteration
+        //Start with an unmatched left vertex( boy ) in each iteration
         for( int u{ 0 }; u < noBoys; ++u )
         {
-            visited.assign( noBoys, false ); //Reset before each iteration
+            //Reset so that its possible to change matchings if needed
+            visited.assign( noBoys, false );
             
-            //Adds 1 if new augmenting path found, 0 otherwise
+            //Adds 1 if a matching can be added, 0 otherwise
             MCBM += Augment( u );  
         }
 
