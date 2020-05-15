@@ -10,7 +10,6 @@
 #include <cstring>
 #include <regex>
 #include "SuffixArray.h"
-#include "SuffixArray.h"
 
 using namespace std;
 
