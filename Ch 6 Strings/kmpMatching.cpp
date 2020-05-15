@@ -1,4 +1,4 @@
-/* String Matching in a 2D Grid using Knuth-Morris-Pratt’s Algorithm
+/* String Matching using Knuth-Morris-Pratt’s Algorithm
 
   Test case:
   I DO NOT LIKE SEVENTY SEV BUT SEVENTY SEVENTY SEVEN
