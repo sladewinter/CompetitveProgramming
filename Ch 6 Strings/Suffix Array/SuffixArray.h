@@ -78,6 +78,10 @@ public:
         break;                           //Early stopping optimization
     }
   }
+ 
+  int size() { return SA.size(); }              //Suffix Array size
+
+  int operator[]( int i ) { return SA[ i ]; }  //Return index element
 
   void print()                                //Print out Suffix Array
   {
