@@ -13,4 +13,4 @@ int main()
 		printf( "%d\n", k ^ ( k >> 1 ) );
 	}
 	return 0;
-}													  
+}
