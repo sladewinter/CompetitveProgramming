@@ -1,3 +1,6 @@
+//UVa 10004 - Bicoloring
+//Bipartite Graph Check using modified BFS
+
 #include <iostream>
 #include <vector>
 #include <queue>
