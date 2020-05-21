@@ -12,20 +12,6 @@ using vi = vector<int>;
 int visited[100];
 vi  AdjList[100];
 
-
-//For printing out Adjacency List
-
-// void printGraph( int size )
-// {
-//   for( int i{0}; i < size; ++i )
-//   {
-//     printf( "%d : ", i );
-//     for( auto &element : AdjList[i] )
-//       printf( "%d ", element );
-//     printf( "\n" );
-//   }
-// }
-
 void printLine( int N )
 {
   printf( "+" );
