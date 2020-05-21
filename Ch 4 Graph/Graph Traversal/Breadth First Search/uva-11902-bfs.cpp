@@ -1,5 +1,5 @@
 //UVa 11902 - Dominator
-//Depth First Search
+//Breadth First Search
 
 #include<iostream>
 #include<vector>
