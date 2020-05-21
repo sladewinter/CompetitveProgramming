@@ -1,3 +1,6 @@
+//UVa 11902 - Dominator
+//Breadth First Search
+
 #include<iostream>
 #include<vector>
 #include<cstring>
@@ -8,6 +11,9 @@ using vi = vector<int>;
 
 int visited[100];
 vi  AdjList[100];
+
+
+//For printing out Adjacency List
 
 // void printGraph( int size )
 // {
@@ -36,6 +42,7 @@ void DFS( int u )
       DFS( v );
 }
 
+//Modified DFS which skips the skip vertex and its edges
 void dominator( int u , int skip )
 {
   visited[u] = 1;
@@ -66,12 +73,14 @@ int main()
     memset( visited, 0, sizeof( visited ) );
     memset( output, 'Y', sizeof( output ) );
 
+    //Run dfs(0) on graph to record vertices reachable from vertex 0
     DFS( 0 );
     for( int i{0}; i < N; ++i )
       if( !visited[i] )
         for( int j{0}; j < N; ++j )
           output[j][i] = 'N';
 
+    //Turn off all the outgoing edges of vertex i and rerun dfs(0)
     for( int i{1}; i < N; ++i )
     {
       memset( visited, 0, sizeof( visited ) );
