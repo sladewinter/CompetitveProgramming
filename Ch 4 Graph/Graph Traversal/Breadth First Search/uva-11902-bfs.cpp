@@ -1,30 +1,39 @@
 //UVa 11902 - Dominator
 //Breadth First Search
 
-#include<iostream>
-#include<vector>
-#include<cstring>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <queue>
 
 using namespace std;
-
 using vi = vector<int>;
 
-int visited[100];
-vi  AdjList[100];
+constexpr int INF{ 999999999 };
+int dist[100];                           //Distance from Source 
+vi  AdjList[100];                       //Adjacency List
+int N;                                 //No of vertices
 
+void dominator( int source, int skip )         //Modified BFS
+{
+  fill( dist, dist + N, INF );               //Safer than memset
+  dist[source] = 0;
+  queue<int> que;
+  que.push(source);
 
-//For printing out Adjacency List
-
-// void printGraph( int size )
-// {
-//   for( int i{0}; i < size; ++i )
-//   {
-//     printf( "%d : ", i );
-//     for( auto &element : AdjList[i] )
-//       printf( "%d ", element );
-//     printf( "\n" );
-//   }
-// }
+  while( !que.empty() )
+  {
+    int u{ que.front() };
+    que.pop();
+    for( auto &v : AdjList[u] )
+      if( dist[v] == INF && v != skip )     
+      {
+        dist[v] = dist[u] + 1;
+        que.push(v);
+      }
+  }
+}
 
 void printLine( int N )
 {
@@ -34,31 +43,15 @@ void printLine( int N )
   printf( "+\n");
 }
 
-void DFS( int u )
-{
-  visited[u] = 1;
-  for( auto &v : AdjList[u] )
-    if( !visited[v] )
-      DFS( v );
-}
-
-//Modified DFS which skips the skip vertex and its edges
-void dominator( int u , int skip )
-{
-  visited[u] = 1;
-  for( auto &v : AdjList[u] )
-    if( !visited[v] && v != skip )
-      dominator( v, skip );
-}
-
 int main()
 {
-  int TC, N;
-  int caseNo{ 0 };
-  int graph{ 0 };
-  char output[100][100];
-  scanf( "%d\n", &TC );
-  while( TC-- )
+  int T;                               //Problem parameter
+  int caseNo{ 0 };                    //For printing purpose
+  int edge{ 0 };                     //Whether 2 vertices have edge
+  char output[100][100];            //For printing purpose
+
+  scanf( "%d\n", &T );
+  while( T-- )
   {
     scanf( "%d\n", &N );
 
@@ -66,27 +59,26 @@ int main()
     {
       AdjList[i].clear();
       for( int j{0}; j < N; ++j )
-        if( scanf( "%d\n", &graph ), graph )
+        if( scanf( "%d\n", &edge ), edge )
           AdjList[i].push_back(j);
     }
-
-    memset( visited, 0, sizeof( visited ) );
-    memset( output, 'Y', sizeof( output ) );
-
-    //Run dfs(0) on graph to record vertices reachable from vertex 0
-    DFS( 0 );
+    
+    //Run bfs(0) on graph to record vertices reachable from vertex 0
+    dominator(0, -1);
+    
+    //Check which vertices unreachable from source
+    memset( output, 'Y', sizeof(output) );
     for( int i{0}; i < N; ++i )
-      if( !visited[i] )
+      if( dist[i] == INF )
         for( int j{0}; j < N; ++j )
           output[j][i] = 'N';
 
-    //Turn off all the outgoing edges of vertex i and rerun dfs(0)
+    //Turn off all the outgoing edges of vertex i and rerun bfs(0)
     for( int i{1}; i < N; ++i )
     {
-      memset( visited, 0, sizeof( visited ) );
       dominator( 0, i );
       for( int j{0}; j < N; ++j )
-        if( visited[j] && i != j )
+        if( dist[j] != INF && i != j )
           output[i][j] = 'N';
     }
 
