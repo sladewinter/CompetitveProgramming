@@ -1,4 +1,6 @@
-//For details and clarificattions refer articulP.cpp
+//UVa 11838 - Come and Go
+//For details and clarificattions see ArticulationPoints&Bridges.cpp
+//Find Strongly Connected Components using Tarjan's modified DFS algo
 
 #include <iostream>
 #include <vector>
