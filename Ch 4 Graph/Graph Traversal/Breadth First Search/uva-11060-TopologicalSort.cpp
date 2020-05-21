@@ -1,5 +1,9 @@
 // UVa 11060 - Beverages
-//Topological Sort using Kahn's Algorithm
+//Topological Sort using Kahn's modified BFS Algorithm
+
+//Priority Queue needed only to maintain order of input
+//For arbitrary Topological order a simple Queue is enough
+//The algo doesn't need a Priority Queue, this problem does
 
 #include <iostream>
 #include <string>
@@ -44,10 +48,12 @@ int main()
       ++inDegree[ temp2 ];
     }
 
-    printf( "Case #%d: Dilbert should drink beverages in this order:", ++caseNo );
+    printf( 
+      "Case #%d: Dilbert should drink beverages in this order:"
+        , ++caseNo );
 
-    //This is alternate constructor for implementing
-    //pq as Min-heap. By default its Max-heap.
+    //Constructor for implementing priority queue as Min-heap
+    //Just replace with normal Queue if input order irrelevant
     priority_queue<int, vi, greater<int>> pq;
     for( int i{ 0 }; i < N; ++i )
       if( inDegree[i] == 0 )
