@@ -1,3 +1,6 @@
+//UVa - 10360 - Rat Attack
+//Iterative Complete Search
+
 #include <iostream>
 #include <cstdint>
 #include <array>
