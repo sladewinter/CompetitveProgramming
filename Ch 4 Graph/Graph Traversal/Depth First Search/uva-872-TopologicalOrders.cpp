@@ -15,7 +15,7 @@ using iter = sregex_iterator;
 using vi = vector<int>;
 using vvi = vector<vi>;
 
-vvi AdjMatrix;
+vvi AdjList;
 int vert{0};                //No of vertices
 vi print;                  //Printing purpose
 int inDegree[21];          
@@ -42,11 +42,11 @@ void TopoOrder( int mask )
 			continue;
 
 		print.push_back(u);                //Push vertex for printing
-		for( auto &v : AdjMatrix[u] )      
+		for( auto &v : AdjList[u] )      
 			--inDegree[v];                 
 		TopoOrder( mask & ~LSB );          //Recurse
 
-		for( auto &v : AdjMatrix[u] )      //Recursion wraps back
+		for( auto &v : AdjList[u] )      //Recursion wraps back
 			++inDegree[v];                 //Replace degrees for next
 		print.pop_back();                  //Pop back vertex for next
 	}
@@ -72,7 +72,7 @@ int main()
 			int2char[vert++] = ch;
 		}
 
-		AdjMatrix.assign(vert, vi());
+		AdjList.assign(vert, vi());
 
 		regex edge{ "[A-Z][<>][A-Z]" };           //Faster ways exist
 		getline( cin, line );
@@ -83,7 +83,7 @@ int main()
     	for ( iter k{ beg }; k != end; ++k )
     	{	
     		string temp{ (*k).str() };                
-    		AdjMatrix[char2int[temp[0]]].push_back(char2int[temp[2]]);
+    		AdjList[char2int[temp[0]]].push_back(char2int[temp[2]]);
     		++inDegree[char2int[temp[2]]];
     	}
  
