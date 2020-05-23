@@ -17,7 +17,7 @@ using vvi = vector<vi>;
 
 vvi AdjList;
 int vert{0};                //No of vertices
-vi print;                  //Printing purpose
+vi print;                  //Printing purposes
 int inDegree[21];          
 unordered_map<int, char> int2char;
 bool solved;
