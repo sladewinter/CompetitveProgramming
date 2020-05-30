@@ -1,4 +1,4 @@
-# Coding101
+# Competitive Programming
 
 My C++ solutions to some UVa Online Judge coding problems
 presented in CPBook 3 by Steven & Felix Halim.
