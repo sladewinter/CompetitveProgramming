@@ -1,5 +1,6 @@
 //Longest Increasing Subsequence
 //1 + 2 + 3 + 4 + .... + n = O(n^2) so may give TLE
+//Check uva-481.cpp in Bottom Up Folder for O(nlgk) AC solution
 
 #include <iostream>
 #include <vector>
