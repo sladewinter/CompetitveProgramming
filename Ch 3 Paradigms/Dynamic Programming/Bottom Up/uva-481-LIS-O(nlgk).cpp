@@ -1,6 +1,6 @@
 //UVa - 481 - What Goes Up
 //Longest Increasing Subsequence O(nlgk), k=LISlen, n=i/p len
-//Bottom up DP(using previous info while filling) + Greedy(search)
+//Bottom up DP(using previous info while filling) + Greedy insertion 
 
 #include <iostream>
 #include <algorithm>
